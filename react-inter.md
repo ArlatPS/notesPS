@@ -35,3 +35,36 @@
         [a, b],
     );
     ```
+- useLayoutEffect(callback)
+    - similar to useEffect() but it is synchronous to render and useEffect() is sheduled after that
+    - it runs at the same time as componentDidMount and componentDidUpdate wheareas euseEffect is sheduled after
+    - only needed to measure DOM nodes for animation
+- useId()
+    - for consistent ids
+    ```
+    const id = useId();
+    <label htmlFor={id}>
+    <input id={id}>
+    ```
+- useImperativeHandle()
+- useDebugValue()
+- useDefferedValue() and useTransition() - low priority updates
+
+## Code Splitting
+- lazy(callback with import)
+- Suspense with fallback
+```
+import { useState, lazy, Suspense } from "react";
+
+const Details = lazy(() => import("./Details"));
+
+<Suspense
+  fallback={
+    <div className="loading-pane">
+      <h2 className="loader">🌀</h2>
+    </div>
+  }
+>
+  […]
+</Suspense>;
+```
