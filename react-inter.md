@@ -68,3 +68,19 @@ const Details = lazy(() => import("./Details"));
   […]
 </Suspense>;
 ```
+
+
+## to arrange
+- setState(x) is really setState(n => x)
+- it can be used to really queue operations on state
+  ```
+  setVar(n => n + 1)
+  setVar(n => n + 1)
+  setVar(n => n + 1)
+  ```
+- another good use `setEnabled(e => !e)`
+
+- updating arrays in state
+  - adding - [...arr, newVal] - instead of push or unshift
+  - removing - filter or slice - instead of pop, shift or splice
+  - replacing - map - instead of splice or assignment
