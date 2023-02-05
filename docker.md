@@ -21,3 +21,7 @@
 ## Buliding image
 
 - docker build -t name/image-name:ver path
+
+
+## Another
+- docker image tag oldtag newtag
