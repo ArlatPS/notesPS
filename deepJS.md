@@ -166,3 +166,46 @@
 - ES6 module patter with different files and export
 
 # Objects
+
+## this
+
+- this reference/binding is determined by how the function is called
+- 4 ways function can be called
+  - **varName.methodName()** - this refers to varName scope (binding can be implicit - function in varName object or dynamic - its outside and only assigned inside varName)
+  - **funcName.call(contextObject, arguments)** - explicit binding - this refers to contextObject
+  - **varName.methodName.bind(contextObj)** - hard binding - preserves current state
+  - **new funcName(args)** - new binding
+- steps of new keyword
+  - create new empty object
+  - link that object to another object
+  - call function with this as new object
+  - if function doesn't return an object, return this
+- **determination of this**
+  - is function called by new - `{}`
+  - is function called by .call(), .apply(), or .bind() - explicit context
+  - is function called on an object - object
+  - in non strict mode default global object
+- **arrow functions don't define local bindings for this**, so it uses lexical this (outer)
+
+## Prototypes
+
+- call with new makes an object linked to its prototype
+
+  ```
+  function Workshop(teacher) {
+    this.teacher = teacher
+  }
+  Workshop.prototype.ask = function() {}
+
+  var deepJS = new Workshop("Kyle")
+  deepJS.contructor === Workshop
+  deepJS.__proto__ === Workshop.prototype
+  Object.getPrototypeOf(depJS) === Workshop.prototype
+  ```
+
+- .prototype to assign
+- `__proto__` (dunder proto) to get prototype of an object
+- objects are linked - behavior delegation
+  - `Object.create(Workshop.prototype)`
+  - `Object.assign()`
+- delegation design pattern
