@@ -53,6 +53,7 @@
 - TouchableOpacity around pressable component (old)
 - `<Pressable>` is modern, but has to be styled (ternary operator for style according to state)
 - to get properties of user device `useWindowDimensions()`
+- Victory for charts
 
 ## Navigation
 
@@ -195,3 +196,42 @@ const getAppData = async (): Promise<AppData | null> => {
   - flaticon.com
   - Svg and Path from react-native
   - tool for converting to sensible svg paths react-svgr.com
+
+## Animation
+
+### Basic Animations for UI Shifts
+
+- LayoutAnimation from react-native
+- enabling on Android
+  ```
+  import { Platform, UIManager } from 'react-native';
+  if (Platform.OS === 'android') {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
+  ```
+- `LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);` before function that causes UI change (like deleting an item)
+-
+
+### Reanimated 2
+
+- react-native-reanimated
+- in babel-config.js `plugins: ['react-native-reanimated/plugin']`
+- only reanimated components can use animated styles
+  ```
+  const ReanimatedPressable = Reanimated.createAnimatedComponent(Pressable);
+  ```
+- useAnimatedStyle
+
+  ```
+  const buttonStyle = useAnimatedStyle(
+    () => ({
+      opacity: selectedMood ? withTiming(1) : withTiming(0.5),
+
+    }),
+    [selectedMood]
+  );
+  ```
+
+- `withTiming(value, timeLength)` - makes transitions
