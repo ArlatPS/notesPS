@@ -51,39 +51,63 @@
     ```
 
 - TouchableOpacity around pressable component (old)
+- `<Pressable>` is modern, but has to be styled (ternary operator for style according to state)
+- to get properties of user device `useWindowDimensions()`
 
 ## Navigation
 
 - @react-navigation/native
 - `<NavigationContainer>` wraps
 - navigators can be nested (modals `mode="modal`)
-- stack navigation
+
+### Stack navigation
+
+```
+const Stack = createStackNavigator();
+
+<NavigationContainer>
+  <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Screen2" component={Screen2} />
+  </Stack.Navigator>
+</NavigationContainer>
+```
+
+- every component inside has navigation prop
+  `navigation.navigate("ScreenName")`
+- to `.navigate` second arg can be passed and its value will be available in opened component in route.params
 
   ```
-  const Stack = createStackNavigator();
+  navigation.navigate('ColorPalette', { paletteName: 'Solarized" })
 
-  <NavigationContainer>
-    <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Screen2" component={Screen2} />
-    </Stack.Navigator>
-  </NavigationContainer>
+  route.params.paletteName
   ```
 
-  - every component inside has navigation prop
-    `navigation.navigate("ScreenName")`
-  - to `.navigate` second arg can be passed and its value will be available in opened component in route.params
+- for dynamic screen titles
+  ```
+  <StackScreen name="Profile" component={ProfileScreen} options={({ route }) => ({title: route.params.name})} />
+  ```
 
-    ```
-    navigation.navigate('ColorPalette', { paletteName: 'Solarized" })
+### Bottom Navigation
 
-    route.params.paletteName
-    ```
+```
+npm install @react-navigation/native react-native-screens react-native-safe-area-context @react-navigation/bottom-tabs
+```
 
-  - for dynamic screen titles
-    ```
-    <StackScreen name="Profile" component={ProfileScreen} options={({ route }) => ({title: route.params.name})} />
-    ```
+```
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const BottomTabs = createBottomTabNavigator();
+
+export const BottomTabsNavigator: React.FC = () => {
+  return (
+    <BottomTabs.Navigator>
+      <BottomTabs.Screen name="Home" component={Home} />
+      <BottomTabs.Screen name="History" component={History} />
+    </BottomTabs.Navigator>
+  );
+};
+```
 
 ## Forms
 
@@ -98,3 +122,76 @@
     - `onChangeText={setValue}`
 - `<Picker>` with `<Picker.item>`
 - `<Switch>`
+
+## Context
+
+```
+const AppContext = createContext<AppContextType>(defaultValue);
+
+export const AppProvider = ({ children }: PropsWithChildren) => {
+  const [value, setValue] = useState()
+  return (
+    <AppContext.Provider value={{ value, setValue }}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+```
+
+- wrap `<NavigationContainer>` with `<AppProvider>`
+- then nice way is to create a hook
+  ```
+  export const useAppContext = () => React.useContext(AppContext);
+  ```
+
+## Persisting Data - Async Storage
+
+- npm install @react-native-async-storage/async-storage
+
+```
+type AppData = {
+  ...
+};
+
+const key = "app_key";
+
+const setAppData = async (appData: AppData) => {
+  try {
+    await AsyncStorage.setItem(key, JSON.stringify(appData));
+  } catch {}
+};
+
+const getAppData = async (): Promise<AppData | null> => {
+  try {
+    const res = await AsyncStorage.getItem(key);
+    if (res) {
+      return JSON.parse(res);
+    }
+  } catch {}
+  return null;
+};
+```
+
+## Images
+
+- local images
+  - `<Image>` from react-native
+  ```
+  const imageSrc = require('../../assets/butterflies.png');
+  <Image source={imageSrc} />;
+  ```
+  - width/heihgt values related to pixel density
+  - convention 3 sizes per image
+  - automatically when in the same folder with image.png
+    - image@2x.png
+    - image@3x.png
+  - sizing - height: 100, aspectRatio: 1
+- network images
+  - `<Image source={{uri : imageUrl}} />`
+  - it needs height/width in style otherwise wont render
+- `<ImageBackground />`
+- for production ract-native-fast-image
+- react-native-svg
+  - flaticon.com
+  - Svg and Path from react-native
+  - tool for converting to sensible svg paths react-svgr.com
