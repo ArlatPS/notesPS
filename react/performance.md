@@ -52,4 +52,22 @@
 ## Suspensing
 
 - lazy and Suspense
-- **useTransition()**
+- **useTransition()** - makes passed callback less urgent (so UI responsivness can be prioritized)
+
+  ```
+  const [isPending, startTransition] = useTransition();
+
+  //in for ex event handler
+  startTrasition(() => {expensiveFunc()})
+  {isPending ? LoadingPane : Component}
+  ```
+
+- **useDefferedValue** - makes variable less urgent in depednecies arrays
+
+  ```
+  const defferedArticle = useDefferedValue(article)
+
+  useEffect(() => {}, [defferedArticle])
+
+  {article !== defferedArticle ? <loading pane /> : null}
+  ```
