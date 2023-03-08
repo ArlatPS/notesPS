@@ -29,3 +29,38 @@
 - `fetch("url", {
   next: { revalidate: 10 },
 })` - **ISR** time in seconds (old getStaticProps with revalidate)
+
+- client side when at the top before imports `"use client";`
+- client side for state...
+- createContext only in client side, so separate file with `"use client";`
+- to refresh from client component
+
+  ```
+  import { useRouter } from "next/navigation"
+  const router = useRouter();
+  router.refresh();
+  ```
+
+### Route Segment Config Options
+
+- config for behaviour of Page, Layout or a Route Handler (API Routes)
+- dynamic
+  ```
+  export const dynamic = 'auto'
+  // 'auto' | 'force-dynamic' | 'error' | 'force-static'
+  ```
+- revalidate
+  ```
+  export const revalidate = false
+  // false | 'force-cache' | 0 | number
+  ```
+- ...docs
+
+## General
+
+- useSearchParams() - client side
+  ```
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
+  ```
+- cookies() - opt to dynamic rendering
