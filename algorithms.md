@@ -51,4 +51,4 @@
 - pivot is a transitive property - if arrays are divided by pivot every element in left must be smaller then every element in rigth and these comparisons don't have to be made
 - QuickSort 3 with pivot as a middle value of last three elements
 
-## Binary Tree
+## Binary Trees
