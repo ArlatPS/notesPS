@@ -51,6 +51,21 @@
   }
   ```
 
+### Iterators
+
+- iterator function returns next element on every call - treating data more like flow than arrays
+- simple array iterator
+  ```
+  function returnIterator(arr) {
+    let i = -1;
+    function iterator() {
+      i++;
+      return arr[i];
+    }
+    return iterator;
+  }
+  ```
+
 ## Asynchronous JS
 
 - takes advantage of Web Browser Features (APIs) - JS itself is only synchronous
@@ -68,12 +83,13 @@
 - **fetch("url")** - does two things: initiate xhr (xls http request) through the browser features and returns a Promise object
 - Promise object has three important properties
   - **`.value`** - in which returned will be stored, but firstly it is undefined
-  - **`.onFulfilment`** - hidden array of functions (that are pushed by **`.then`**) which will be pushed to MicroTask Queue when value is returned (ex. data fetched) and they automatically take .value as an argument
+  - **`.onFulfillment`** - hidden array of functions (that are pushed by **`.then`**) which will be pushed to MicroTask Queue when value is returned (ex. data fetched) and they automatically take .value as an argument
   - **`.onRejection`** - hidden array of functions pushed by **`.catch`**
 - also properties .pending, .resolved, .rejected
 
 ### Queues
 
+- when global synchronous code is finished (empty call stack) Event Loop goes to
 - MicroTask Queue / Job Queue (specs) - first
 - Callback Queue / Macrotask Queue / Task Queue (specs) - second
 
@@ -84,7 +100,7 @@
   ```
   function* funcName() {
     yield 4;
-    yeidl 5;
+    yield 5;
   }
   ```
 - calling this function returns an object with **`.next()`**
@@ -114,11 +130,11 @@
   // creating Promise
   const FutureData = returnNextElement.next();
 
-  //pushing to .onFulfilment
+  //pushing to .onFulfillment
   FutureData.then(doWhenDataReceived)
 
 
-  // on promise fulfilment it will place value to data variable in generator (into yield)
+  // on promise fulfillment it will place value to data variable in generator (into yield)
 
   function doWhenDataReceived(value) {
     returnNextElement.next(value);
@@ -144,3 +160,29 @@ console.log("second")
 // second
 // data
 ```
+
+## OOP
+
+- `const newObj = Object.create(objName)`
+  - creates new empty object
+  - with hidden property `__proto__` that links to objName which gives newObj access to objName methods
+  - sophisticated and very explicit
+  - behaviour delegation
+- `.hasOwnProperty()` from `Object.prototype`
+- implicit parameter `this`
+  - obj.method() - implicit this
+  - this is obj
+  - arrow function is lexically scoped and has different this behaviour (this refers to lexical scope of where the function was declared)
+- ## keyword `new`
+  - same behaviour as Object.create() but with some automation
+  1. create empty object this
+  2. set `this.__proto__` to funcName.prototype
+  3. return this
+- functions have 2 parts
+  - () function part
+  - . object part which has object prototype which can be populated with methods
+- class = function(constructor) + object - it is really only syntactic sugar
+
+## Functional Programming
+
+-
