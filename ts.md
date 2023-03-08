@@ -4,8 +4,8 @@
 
 - open source syntactic superset of JS
 - .ts is compiled to .js and .d.ts with types
-- package.json with devDependendcy typescript
-- tsonfig.json
+- package.json with devDependency typescript
+- tsconfig.json
   - outDir
   - target - which JS
   - include
@@ -14,9 +14,9 @@
 
 - literal type ex. `const num = 6` - can only be 6
 - inference - TS makes as specific as possible /reasonable assumption about type
-- types are deined when sth is declared
+- types are defined when sth is declared
 - type annotation `let num: number`
-- in fucntions return types  
+- in functions return types  
   `const func = (arg: type): type => {}`
 - objects
   ```
@@ -26,7 +26,7 @@
   } = {...}
   ```
   - optional properties `{ propertyName?: number }` - so type is number | undefined (but it is not the same as defining with | undefined)
-- type guard - if or switch or throw Error statements to guarante right type
+- type guard - if or switch or throw Error statements to guarantee right type
 - dictionaries - type with index signature `[k: string]`
   ```
   const dicName: {
@@ -63,11 +63,11 @@
   }
   ```
   - more limited - only describes object type
-  - **intefaces are open - can be augmented by calling interface IName {} again - it adds/modifies**
+  - **interfaces are open - can be augmented by calling interface IName {} again - it adds/modifies**
   - inheritance
     - **class Dog implements AnimalLike**
     - **interface Name extends ClassName**
-- interfaces and types can be recursvie
+- interfaces and types can be recursive
   ```
   type nestedNumbers = number | nestedNumbers[]
   ```
@@ -82,21 +82,21 @@
   type TwoNumberCalc = (x: number, y: number) => number
   const add: TwoNumberCalc = (a, b) => a + b
   ```
-- void fro functions that dont return
+- void from functions that don't return
 - construct signatures - keyword new
-- fucntion overload
+- function overload
   - ex. first argument defines second
-  - define possible combinations in fucntion heads
+  - define possible combinations in function heads
   ```
-  function handleMainEvenet(
+  function handleMainEvent(
       elem: HTMLFormElement
       handler: FormSubmitHandler
   )
-  function handleMainEvenet(
+  function handleMainEvent(
       elem: HTMLFrameElement
       handler: MessageHandler
   )
-  function handleMainEvenet(
+  function handleMainEvent(
       elem: HTMLFormElement | HTMLFrameElement
       handler: FormSubmitHandler | MessageHandler
   ) {}
@@ -136,7 +136,7 @@
 - constructor order of operation
   1. super()
   2. param property initialization
-  3. other class field inittialization
+  3. other class field initialization
   4. other code in constructor after super()
 
 ## Types
@@ -146,8 +146,8 @@
 - bottom type never
   - exhaustive conditional
   ```
-  if for all possbile types and
-  } else {
+  if for all possible types and
+   else {
       const neverValue: never = never
   }
   ```
@@ -169,11 +169,11 @@
   ```
 - nullish values
   - null - there is a value and it's nothing
-  - undefined - value isn't avaliable (yet?)
+  - undefined - value isn't available (yet?)
   - void - return from a function should be ignored
 - non-null assertion operator !.
 - definitive assignment operator !:
-  - used to supress TS objections about class field being used, when it cant be proven that it was initialized
+  - used to suppress TS objections about class field being used, when it cant be proven that it was initialized
   - for example with asynchronistic constructor
 
 ## Generics
@@ -196,8 +196,8 @@
 
 ## General
 
-- things (intefaces, variables, namespaces) with the same name can stack on top of each other (also when exporting)
-- they can be differenciated by trying to use them
+- things (interfaces, variables, namespaces) with the same name can stack on top of each other (also when exporting)
+- they can be differentiated by trying to use them
 - classes are 2 things stacked (**declaration merging**)
   - a value - Class itself - can invoke static methods on that
   - a type - interface that describes an instance of a class
@@ -271,7 +271,7 @@
 - build in Record and Pick
 - modifiers
   - `[P in keyof T]?:` optional
-  - `[P in keyof T]-:` requierd
+  - `[P in keyof T]-:` required
   - `readonly [P in keyof T]`
 - template literals
   ```
@@ -281,7 +281,7 @@
   - UpperCase
   - LowerCase
   - Capitalize
-  - Uncapitalzie
+  - Uncapitalize
   - ex. `${Capitalize<Color>}`
 - key remapping
   ```
