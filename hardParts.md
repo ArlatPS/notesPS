@@ -9,6 +9,8 @@
 - call stack
 - Global Execution Context = thread of execution + Global Variable Environment
 - Local Execution Context = thread of execution + Variable Environment
+- heap – real store of code
+- global memory holds links to objects in heap
 
 ## Callbacks and Higher Order Functions
 
@@ -185,4 +187,32 @@ console.log("second")
 
 ## Functional Programming
 
--
+- main goal are self contained tiny functions re-joined into full-sized tasks, which are easy to reuse and repurpose and also easy to understand
+- anonymous functions
+- **reduce**
+- accumulator (array, string, number)
+- reducer (combining logic, code , functionality)
+- `array.reduce(reducer, initial value`
+- own reducer
+
+  ```
+  const reduce = (array, howToCombine, buildingUp) => {
+   	for (let i = 0; i < array.length; i++){
+   		buildingUp = howToCombine(buildingUp, array[i])
+   	}
+   	return buildingUp
+  }
+
+  ```
+
+- array.map – copyArrayAndManipulate
+- array.filter(filterFunc (which returns bool))
+- function being referentially transparent (references only its arguments)
+- copying an array
+  - `[…arr]` – shallow
+  - `JSON.parse(JSON.stringify(array))` – deep
+- **arity** – amount of expected arguments
+- arity mismatch
+- **function decoration** – “editing” a function by storing it in a backpack of another with some extra functionality for example **once, memoize**
+- **partial application** – using function decoration to prefill arguments
+- **currying** – decorating a function, so it takes one argument at a time and runs once it has all the arguments
