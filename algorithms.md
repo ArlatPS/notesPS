@@ -73,3 +73,18 @@
 - worse for lookup - has to go through nodes
 
 ## Binary Trees
+
+- input must be sorted
+- node has up to 2 children (left and right)
+- everywhere left is smaller than node and right is bigger
+- lookup O(log n) - really fast for even enormous data sets
+
+## Bloom filters
+
+- bloom filter is a data structure which is similar to set
+- it responds to question: have you seen this before? with no (definitely) or maybe
+- trading accuracy (false positives) for much smaller space complexity
+- hashing functions ex. 3 that convert to ex 3 numbers
+- flipping 0 -> 1 in array on according position
+- during checking if at least one is 0 then it definitely wasn't previously seen
+- if all 1 then maybe it was seen
