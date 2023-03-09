@@ -27,7 +27,7 @@
 ### Insertion Sort
 
 - takes unsorted (smaller than the one before) and inserts in the right place (lower in the array)
-- great for mostly sorted lists that nedd a couple changes - best case O(n)
+- great for mostly sorted lists that need a couple changes - best case O(n)
 - overall O(n2)
 - spatial O(1)
 - can be stable
@@ -36,19 +36,40 @@
 
 ### Merge Sort
 
-- divide into small arrays (lenght 1 at deepest recursion) and then merge (`arr1[0] > arr2[0]`) - small arrays are sorted already
+- divide into small arrays (length 1 at deepest recursion) and then merge (`arr1[0] > arr2[0]`) - small arrays are sorted already
 - time O(log n \* n) - always the same (no best case)
 - space O(n) - array for every element
 - .sort() calls mergeSort and sometimes quickSort
 
 ### Quick Sort
 
-- last element of array is the pivot, all smaller than it go to left array, bigget to right array, then `[...left, pivot, ...right]`
+- last element of array is the pivot, all smaller than it go to left array, bigger to right array, then `[...left, pivot, ...right]`
 - worst case O(n2) - sorted or reverse sorted
 - average O(n log n)
 - destructive spatial O(1)
 - non destructive spatial O(n) - easier
-- pivot is a transitive property - if arrays are divided by pivot every element in left must be smaller then every element in rigth and these comparisons don't have to be made
+- pivot is a transitive property - if arrays are divided by pivot every element in left must be smaller then every element in right and these comparisons don't have to be made
 - QuickSort 3 with pivot as a middle value of last three elements
+
+## Binary Search
+
+- for sorted arrays
+- check middle if smaller go left, bigger go right
+- time O(log n)
+- can be done recursively or with a loop
+
+## Lists
+
+### Array List
+
+- normal array in JS
+- great for lookup O(1)
+- bad for deleting (if not pop) O(n)
+
+### Linked List
+
+- every node has value and pointer to next node
+- better for manipulation
+- worse for lookup - has to go through nodes
 
 ## Binary Trees
