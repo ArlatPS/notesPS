@@ -16,7 +16,7 @@
   - loading.js - loading UI for segment and children - wraps in React Suspense Boundary
   - error.js - error UI - React Error Boundary
   - not-found.js - triggered by `notFound() from next/navigation` for example when user not found (not 404)
-  - head.js - for `<head>` (can be also done in layout)
+  - head.js - for `<head>` (can be also done in layout) - deprecated with 13.2 (replaced by export const metadata)
 - export default function component from these files
 - using turbopack - in "scripts" `"dev": "next dev --turbo"`
 
@@ -41,6 +41,18 @@
   router.refresh();
   ```
 
+- generateStaticParams with dynamic route segments to statically generate routes at build time instead of on-demand at request time
+  ```
+  /product/[id]	{ id: string }[]
+  export function generateStaticParams() {
+    return [
+      { id: '1' },
+      { id: '2' },
+      { id: '3' },
+    ];
+  }
+  ```
+
 ### Route Segment Config Options
 
 - config for behaviour of Page, Layout or a Route Handler (API Routes)
@@ -56,6 +68,28 @@
   ```
 - ...docs
 
+### Caching
+
+- `import { cache } from 'react';` to cache request that don't use fetch() ex. server component connecting to db
+- fetch() in 13 is automatically cached
+- In this new model, we recommend fetching data directly in the component that needs it, even if you're requesting the same data in multiple components instead of prop drilling.
+- POST requests are not automatically deduplicated when using fetch
+- preload pattern for prefetching
+- pattern for preload and caching only on server
+
+  ```
+  import { cache } from 'react';
+  import 'server-only';
+
+  export const preload = (id: string) => {
+    void getUser(id);
+  }
+
+  export const getUser = cache(async (id: string) => {
+    // ...
+  });
+  ```
+
 ## General
 
 - useSearchParams() - client side
@@ -64,3 +98,16 @@
   const search = searchParams.get('search');
   ```
 - cookies() - opt to dynamic rendering
+- NextResponse
+  - .json()
+  - cookies
+    - .set(name, value)
+    - .get(name)
+    - .delete(name)
+    - .getAll()
+  - .redirect()
+  - .next() - middleware
+  - .status()
+  - .statusText()
+  - .error()
+- Request.text() - returns a promise that resolves with a text representation of the request body
