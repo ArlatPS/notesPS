@@ -111,3 +111,16 @@
   - .statusText()
   - .error()
 - Request.text() - returns a promise that resolves with a text representation of the request body
+
+
+## Streaming
+- With SSR, there's a series of steps that need to be completed before a user can see and interact with a page:
+1.First, all data for a given page is fetched on the server.
+2.The server then renders the HTML for the page.
+3.The HTML, CSS, and JavaScript for the page are sent to the client.
+4.A non-interactive user interface is shown using the generated HTML, and CSS.
+5.Finally, React hydrates the user interface to make it interactive.
+
+- Streaming allows you to break down the page's HTML into smaller chunks and progressively send those chunks from the server to the client.
+- with loading.js
+- with <Suspense> from "react" wrapped around loading component
