@@ -79,6 +79,13 @@
 - everywhere left is smaller than node and right is bigger
 - lookup O(log n) - really fast for even enormous data sets
 
+### AVL Tree
+
+- specialized type of BST
+- left and right rotations to balance the tree
+- when length difference between sites >= 2 rotation to balance (the max height of one of its children is two more than the max height of the other child)
+- double rotation when the opposite child is heavy during a rotation
+
 ## Bloom filters
 
 - bloom filter is a data structure which is similar to set
