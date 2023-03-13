@@ -95,3 +95,12 @@
 - flipping 0 -> 1 in array on according position
 - during checking if at least one is 0 then it definitely wasn't previously seen
 - if all 1 then maybe it was seen
+
+## Graph
+
+- like a tree but without root
+- nodes connected by edges which can be uni- or bidirectional
+- pathfinding (connections between places) and traversal
+- Tries graphs
+  - for autocompletes
+  - tree with many roots (ex. different letters)
